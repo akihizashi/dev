@@ -41,6 +41,7 @@
 
                           <input type="hidden" name="_method" value="delete" />
                           <input type="hidden" name="post_id" value="{{ $post->id }}">
+
                           <button type="submit" name="delete" class="btn btn-danger btn-sm" title="Delete">
                             <i class="text-light" data-feather="trash"></i>
                           </button>

@@ -30,6 +30,10 @@ Route::post('/admin/shops', 'ShopsController@store');
 
 Route::delete('/admin/shops/{product}/delete', 'ShopsController@delete');
 
+Route::get('/admin/shops/{product}/edit', 'ShopsController@edit');
+
+Route::post('/admin/shops/{product}', 'ShopsController@update');
+
 //Frontend routes
 Route::get('/login', 'SessionController@create');
 
@@ -62,3 +66,5 @@ Route::get('/posts', 'PostsController@index');
 Route::get('/posts/{post}', 'PostsController@show');
 
 Route::get('/shops', 'ShopsController@index');
+
+Route::get('/shops/{product}', 'ShopsController@show');

@@ -56,7 +56,41 @@ class ShopsController extends Controller
     public function edit($id)
     {
       $product = Shop::find($id);
-      return view('admin/posts/edit', compact('product'));
+      return view('admin/shops/edit', compact('product'));
+    }
+
+    public function update($id)
+    {
+      $this->validate(request(), [
+          'name' => 'required|max:50',
+          'code' => 'required|max:8',
+          'description' => 'required|min:10',
+          'release' => 'required',
+          'image' => 'image|nullable|max:1999'
+      ]);
+
+      if(request()->hasFile('image')){
+        $fileNameWithExt = request()->file('image')->getClientOriginalName();
+        $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        $extension = request()->file('image')->getClientOriginalExtension();
+        $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+        $path = request()->file('image')->storeAs('public/product_images', $fileNameToStore);
+      }
+
+      $product = Shop::find($id);
+      $product->name = request('name');
+      $product->code = request('code');
+      if (request()->hasFile('image')){
+        $product->image = $fileNameToStore;
+      }
+      $product->category = request('category');
+      $product->reposition = request('reposition');
+      $product->price = request('price');
+      $product->release = request('release');
+      $product->description = request('description');
+      $product->save();
+
+      return redirect('/admin/shops')->with('status', 'Product changed');
     }
 
     public function delete()
@@ -69,12 +103,16 @@ class ShopsController extends Controller
 
   public function index()
   {
-    $products = Shop::paginate(16);
+    $products = Shop::orderBy('release', 'desc')->paginate(16);
     return view('/shops/index', compact('products'));
   }
 
-  public function show()
+  public function show($id)
   {
+    $product = Shop::find($id);
 
+    $relative_products = Shop::all();
+    return view('/shops/show', compact('product', 'relative_products'));
   }
+
 }

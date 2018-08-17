@@ -6,9 +6,9 @@
     @foreach ($products as $product)
       <div class="col-md-3 col-sm-6 col-12">
         <div class="card my-2">
-          <img class="card-img-top" src="/storage/product_images/{{ $product->image }}" alt="">
+          <img class="card-img" src="/storage/product_images/{{ $product->image }}" alt="">
           <div class="card-body">
-              <h5 class="my-0">{{ $product->name }}</h5>
+              <a class="text-dark" href="/shops/{{ $product->id }}"><h5 class="my-0">{{ $product->name }}</h5></a>
               @if ($product->category == 'CD')
                 <span class="badge badge-primary" style="width:4rem;">{{ $product->category }}</span>
               @elseif ($product->category == 'DVD')
@@ -20,10 +20,17 @@
           </div>
           <div class="card-footer">
               <span class="card-text">￥{{ $product->price }}(No tax)</span>
+              @if ($product->reposition == 0)
+                <button class="btn btn-sm btn-danger pb-0 pt-1 float-right" title="Out of stock">
+                  <i class="my-0" data-feather="x"></i>
+                  <i class="my-0" data-feather="shopping-cart"></i>
+                </button>
+              @else
                 <button class="btn btn-sm btn-outline-secondary pb-0 pt-1 float-right" title="Add to cart">
                   <i class="my-0" data-feather="plus"></i>
                   <i class="my-0" data-feather="shopping-cart"></i>
                 </button>
+              @endif
           </div>
         </div>
       </div>
