@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+  @include('layouts.cart')
   <h2 class="text-center">Shop</h2>
 
   <div class="row">

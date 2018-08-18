@@ -1,0 +1,1 @@
+Kore wa Cart page

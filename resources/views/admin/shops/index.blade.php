@@ -9,8 +9,21 @@
         </button>
       </a>
     </div>
+    <div class="text-center">
+      <form action="/admin/shops/search" method="get">
+        {{ csrf_field() }}
+        <div class="form-row">
+          <div class="col-sm-10">
+            <input type="text" name="searchProduct" class="form-control-dark w-100 p-2" placeholder="Search product">
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary btn-block py-2" type="submit">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
 @include('layouts.status')
-    <div class="col-sm-12">
+{{--    <div class="col-sm-12">
         <table class="table table-hover mt-3">
             <thead class="thead-light">
                 <tr class="row">
@@ -49,7 +62,7 @@
                           <button type="button" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#exampleModal">
                             <i class="text-light" data-feather="trash"></i>
                           </button>
-                          {{--Modal--}}
+                          Modal
                           <div class="modal fade" style="margin-top:20rem;" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
@@ -77,4 +90,5 @@
           {{ $products->links() }}
         </div>
     </div>
+  --}}
 @endsection

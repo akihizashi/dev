@@ -41,8 +41,8 @@
   <hr>
   <h5>Relative product</h5>
   <div class="row">
-    @foreach ($relative_products->where('id', '<>', $product->id)
-                                ->where('category', '=', $product->category)
+    @foreach ($relative_products->where('category', '=', $product->category)
+                                ->where('id', '<>', $product->id)
                                 ->sortByDesc('release')
                                 ->take(4) as $relative_product)
       <div class="col-md-3 col-sm-6 col-12">

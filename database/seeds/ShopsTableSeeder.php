@@ -11,6 +11,6 @@ class ShopsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Shop::class, 1000)->create();
+        factory(App\Shop::class, 9000)->create();
     }
 }

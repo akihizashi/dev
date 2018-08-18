@@ -10,8 +10,28 @@ class ShopsController extends Controller
   //back Controller
     public function indexAdmin()
     {
-      $products = Shop::paginate(16);
-      return view('/admin/shops/index', compact('products'));
+//      $all_products = Shop::all()->count();
+//      $products = Shop::orderBy('release', 'desc')->paginate(8);
+      return view('/admin/shops/index'
+//      , compact('products')
+    );
+    }
+
+    public function search()
+    {
+        $keyword = request('searchProduct');
+
+        $searchProductResults = Shop::where([
+//                            ['user_id', '=', auth()->id()],
+                            ['name', 'LIKE', '%' .$keyword. '%']])
+                            ->orWhere([
+                            ['code', 'LIKE', '%' .$keyword. '%']])
+                            ->orWhere([
+                            ['category', 'LIKE', '%' .$keyword. '%']])
+                            ->orderBy('release', 'desc')
+                            ->paginate(8);
+
+        return view('admin/shops/search', compact('searchProductResults'));
     }
 
     public function create()

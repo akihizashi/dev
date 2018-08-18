@@ -24,6 +24,8 @@ Route::get('/admin/users', 'UsersController@indexAdmin')->middleware(CheckPermis
 
 Route::get('/admin/shops', 'ShopsController@indexAdmin');
 
+Route::get('/admin/shops/search', 'ShopsController@search');
+
 Route::get('/admin/shops/create', 'ShopsController@create');
 
 Route::post('/admin/shops', 'ShopsController@store');
@@ -68,3 +70,5 @@ Route::get('/posts/{post}', 'PostsController@show');
 Route::get('/shops', 'ShopsController@index');
 
 Route::get('/shops/{product}', 'ShopsController@show');
+
+Route::get('/cart', 'CartController@index');
