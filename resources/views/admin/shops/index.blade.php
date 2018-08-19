@@ -17,7 +17,7 @@
             <input type="text" name="searchProduct" class="form-control-dark w-100 p-2" placeholder="Search product">
           </div>
           <div class="col-sm-2">
-            <button class="btn btn-primary btn-block py-2" type="submit">Search</button>
+            <button class="btn btn-primary py-2 float-right" type="submit">Search product</button>
           </div>
         </div>
       </form>

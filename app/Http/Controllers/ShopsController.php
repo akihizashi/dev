@@ -31,7 +31,7 @@ class ShopsController extends Controller
                             ->orderBy('release', 'desc')
                             ->paginate(8);
 
-        return view('admin/shops/search', compact('searchProductResults'));
+        return view('admin/shops/search', compact('searchProductResults', 'keyword'));
     }
 
     public function create()

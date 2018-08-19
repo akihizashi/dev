@@ -75,7 +75,7 @@
                 </tbody>
             </table>
             <div class="float-right">
-              {{ $searchProductResults->links() }}
+              {{ $searchProductResults->appends(Request::only('searchProduct'))->links() }}
             </div>
         </div>
   @endif
