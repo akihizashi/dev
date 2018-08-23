@@ -72,3 +72,9 @@ Route::get('/shops', 'ShopsController@index');
 Route::get('/shops/{product}', 'ShopsController@show');
 
 Route::get('/cart', 'CartController@index');
+
+Route::post('/cart', 'CartController@store');
+
+//Test modal
+Route::get('/modaltrigger', 'ModalController@index');
+Route::get('/modalshow', 'ModalController@show');

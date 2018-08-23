@@ -23,6 +23,8 @@
             @endforeach
           </tbody>
       </table>
-      {{ $users->links() }}
+      <div class="float-right">
+        {{ $users->links() }}
+      </div>
   </div>
 @endsection

@@ -27,10 +27,17 @@
                   <i class="my-0" data-feather="shopping-cart"></i>
                 </button>
               @else
-                <button class="btn btn-sm btn-outline-secondary pb-0 pt-1 float-right" title="Add to cart">
-                  <i class="my-0" data-feather="plus"></i>
-                  <i class="my-0" data-feather="shopping-cart"></i>
-                </button>
+                <form action="/cart" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="id" value="{{ $product->id }}">
+                  <input type="hidden" name="name" value="{{ $product->name }}">
+                  <input type="hidden" name="code" value="{{ $product->code }}">
+                  <input type="hidden" name="price" value="{{ $product->price }}">
+                  <button class="btn btn-sm btn-outline-secondary pb-0 pt-1 float-right" type="submit" title="Add to cart">
+                    <i class="my-0" data-feather="plus"></i>
+                    <i class="my-0" data-feather="shopping-cart"></i>
+                  </button>
+                </form>
               @endif
           </div>
         </div>

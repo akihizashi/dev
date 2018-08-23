@@ -1,7 +1,7 @@
 @extends('layout')
 
   <div class="container w-25 mt-5 pt-5">
-    <h2 class="text-center py-3">Team Lab</h2>
+    <h2 class="text-center py-3">WEB CMS DEV</h2>
     @include('layouts.create_error')
     <form action="/login" method="post">
       {{ csrf_field() }}

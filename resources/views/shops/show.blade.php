@@ -1,8 +1,9 @@
 @extends('layout')
 @section('content')
+  @include('layouts.cart')
   <h2 class="text-center"><a href="/shops">Shop</a></h2>
   <div class="row">
-      <div class="col-md-3 col-sm-6 col">
+      <div class="col-md-3 col-sm-5 col">
         <div class="card my-2">
           <img class="card-img-top" src="/storage/product_images/{{ $product->image }}" alt="">
           <div class="card-body">
@@ -24,15 +25,21 @@
                   <i class="my-0" data-feather="shopping-cart"></i>
                 </button>
               @else
-                <button class="btn btn-sm btn-outline-secondary pb-0 pt-1 float-right" title="Add to cart">
-                  <i class="my-0" data-feather="plus"></i>
-                  <i class="my-0" data-feather="shopping-cart"></i>
-                </button>
+                <form action="/cart" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="id" value="{{ $product->id }}">
+                  <input type="hidden" name="name" value="{{ $product->name }}">
+                  <input type="hidden" name="price" value="{{ $product->price }}">
+                  <button class="btn btn-sm btn-outline-secondary pb-0 pt-1 float-right" type="submit" title="Add to cart">
+                    <i class="my-0" data-feather="plus"></i>
+                    <i class="my-0" data-feather="shopping-cart"></i>
+                  </button>
+                </form>
               @endif
           </div>
         </div>
       </div>
-      <div class="col-md-9 col-sm-6 col">
+      <div class="col-md-9 col-sm-7 col">
         <div class="container">
           {!! $product->description !!}
         </div>
@@ -41,10 +48,12 @@
   <hr>
   <h5>Relative product</h5>
   <div class="row">
-    @foreach ($relative_products->where('category', '=', $product->category)
+    @foreach ($relative_products as $relative_product)
+{{--    ->where('category', '=', $product->category)
                                 ->where('id', '<>', $product->id)
                                 ->sortByDesc('release')
-                                ->take(4) as $relative_product)
+                                ->take(4)--}}
+
       <div class="col-md-3 col-sm-6 col-12">
         <div class="card my-2">
           <img class="card-img-top" style="" src="/storage/product_images/{{ $relative_product->image }}" alt="">
@@ -58,7 +67,7 @@
               @elseif ($relative_product->category == 'Album')
                 <span class="badge badge-secondary" style="width:4rem;">{{ $relative_product->category }}</span>
               @endif
-            <p class="card-text"><small class="text-light">Release: {{ date('Y/m/d', strtotime($relative_product->release)) }}</small></p>
+{{--            <p class="card-text"><small class="text-light">Release: {{ date('Y/m/d', strtotime($relative_product->release)) }}</small></p>--}}
             </div>
           </div>
           <div class="card-footer">

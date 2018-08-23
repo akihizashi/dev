@@ -23,11 +23,13 @@ class ShopsController extends Controller
 
         $searchProductResults = Shop::where([
 //                            ['user_id', '=', auth()->id()],
-                            ['name', 'LIKE', '%' .$keyword. '%']])
+                              ['name', 'LIKE', '%' .$keyword. '%']])
                             ->orWhere([
-                            ['code', 'LIKE', '%' .$keyword. '%']])
+                              ['code', 'LIKE', '%' .$keyword. '%']])
                             ->orWhere([
-                            ['category', 'LIKE', '%' .$keyword. '%']])
+                              ['category', 'LIKE', '%' .$keyword. '%']])
+//                            ->orWhere([
+  //                            ['release', 'LIKE', $keyword. '%']])
                             ->orderBy('release', 'desc')
                             ->paginate(8);
 
@@ -131,8 +133,14 @@ class ShopsController extends Controller
   {
     $product = Shop::find($id);
 
-    $relative_products = Shop::all();
+    $relative_products = Shop::where([
+                                     ['id', '!=', $id],
+                                     ['reposition', '>', 0],
+                                     ['category', '=', $product->category]])
+                                     ->get()->sortByDesc('release')->random(4);
     return view('/shops/show', compact('product', 'relative_products'));
   }
+
+
 
 }

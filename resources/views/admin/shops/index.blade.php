@@ -14,7 +14,7 @@
         {{ csrf_field() }}
         <div class="form-row">
           <div class="col-sm-10">
-            <input type="text" name="searchProduct" class="form-control-dark w-100 p-2" placeholder="Search product">
+            <input type="text" name="searchProduct" class="form-control-dark w-100 p-2" placeholder="Search product by name, code, or category">
           </div>
           <div class="col-sm-2">
             <button class="btn btn-primary py-2 float-right" type="submit">Search product</button>
