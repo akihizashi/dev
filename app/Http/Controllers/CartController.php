@@ -20,11 +20,11 @@ class CartController extends Controller
       $cart = array(
         "id" => request('id'),
         "name" => request('name'),
-        "code" =>request('code'),
-        "price" =>request('price')
+        "code" => request('code'),
+        "price" => request('price')
       );
 
-      $request->session()->put('cart', $cart);
+      $request->session()->push('cart', $cart);
       $request->session()->flash('status', 'Product added to cart');
 
       return redirect('/cart');

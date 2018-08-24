@@ -3,7 +3,7 @@
   @include('layouts.cart')
   <h2 class="text-center"><a href="/shops">Shop</a></h2>
   <div class="row">
-      <div class="col-md-3 col-sm-5 col">
+      <div class="col-md-4 col-sm-5 col">
         <div class="card my-2">
           <img class="card-img-top" src="/storage/product_images/{{ $product->image }}" alt="">
           <div class="card-body">
@@ -29,6 +29,7 @@
                   {{ csrf_field() }}
                   <input type="hidden" name="id" value="{{ $product->id }}">
                   <input type="hidden" name="name" value="{{ $product->name }}">
+                  <input type="hidden" name="code" value="{{ $product->code }}">
                   <input type="hidden" name="price" value="{{ $product->price }}">
                   <button class="btn btn-sm btn-outline-secondary pb-0 pt-1 float-right" type="submit" title="Add to cart">
                     <i class="my-0" data-feather="plus"></i>
@@ -39,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-9 col-sm-7 col">
+      <div class="col-md-8 col-sm-7 col">
         <div class="container">
           {!! $product->description !!}
         </div>
