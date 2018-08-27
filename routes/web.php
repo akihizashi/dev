@@ -73,8 +73,6 @@ Route::get('/shops/{product}', 'ShopsController@show');
 
 Route::get('/cart', 'CartController@index');
 
-Route::post('/cart', 'CartController@store');
+Route::post('/cart/add', 'CartController@add');
 
-//Test modal
-Route::get('/modaltrigger', 'ModalController@index');
-Route::get('/modalshow', 'ModalController@show');
+Route::post('/cart/remove', 'CartController@remove');

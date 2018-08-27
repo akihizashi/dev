@@ -3,12 +3,16 @@
   <h2 class="text-center">Your cart</h2>
 
   @include('layouts.status')
-  @if (session('cart'))
+  @if (session('cart') !== null)
     @foreach (session('cart') as $cartItem)
       <div class="jumbotron py-3">
-        <button type="button" class="close float-right" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
+        <form action="/cart/remove" method="post">
+          {{ csrf_field() }}
+          <input type="hidden" name="cartItemId" value="{{ $cartItem['id'] }}">
+          <button type="submit" class="close float-right" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </form>
         <p class="">{{ $cartItem['name']}}</p>
         <hr class="my-1">
         <div class="row">
@@ -20,7 +24,7 @@
         </div>
       </div>
     @endforeach
-    <div class="row">
+    <div class="row pb-5">
       <div class="col"></div>
       <div class="col"></div>
       <div class="col">
@@ -29,10 +33,11 @@
         </a>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-success btn-block">Payment</button>
+          <button type="button" class="btn btn-success btn-block">Payment</button>
       </div>
     </div>
   @else
   <div class="alert alert-secondary text-center" role="alert">Nothing on your cart. <a href="/shops">Back to shop</a></div>
 @endif
+
 @endsection
