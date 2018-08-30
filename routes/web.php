@@ -76,3 +76,7 @@ Route::get('/cart', 'CartController@index');
 Route::post('/cart/add', 'CartController@add');
 
 Route::post('/cart/remove', 'CartController@remove');
+
+Route::post('/cart/update', 'CartController@update');
+
+Route::post('/cart/clear', 'CartController@clear');
