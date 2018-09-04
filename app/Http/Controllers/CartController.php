@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Transaction;
+use App\Order;
 
 class CartController extends Controller
 {
@@ -81,7 +82,7 @@ class CartController extends Controller
 
     public function clear(Request $request)
     {
-      $request->session()->flush();
+      $request->session()->forget('cart');
 
       return redirect('/cart')->with('status', 'Cart cleared');
     }
@@ -101,12 +102,23 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
+      $cartItems = session('cart');
       if (Auth::check()) {
-      Transaction::create([
-        'user_id' => auth()->id(),
-        'amount'  => request('amount'),
-      ]);
-        $request->session()->flush();
+        $transaction = Transaction::create([
+          'user_id' => auth()->id(),
+          'amount'  => request('amount'),
+        ]);
+        $transaction_id = $transaction->id;
+        foreach ($cartItems as $cartItem) {
+          Order::create([
+            'user_id'        => auth()->id(),
+            'transaction_id' => $transaction_id,
+            'name'           => $cartItem['name'],
+            'quantity'       => $cartItem['quantity'],
+            'price'          => $cartItem['price']
+          ]);
+        }
+        $request->session()->forget('cart');
 
         return redirect('/cart')->with('status', 'Your order was done');
       } else {
