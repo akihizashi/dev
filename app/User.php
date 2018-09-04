@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Task;
 use App\Work;
+use App\Transaction;
 
 class User extends Authenticatable
 {
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function orders()
     {
       return $this->hasMany(Order::class);
+    }
+
+    public function transactions()
+    {
+      return $this->hasMany(Transaction::class);
     }
 }

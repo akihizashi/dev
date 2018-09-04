@@ -17,14 +17,17 @@
         <p class="">{{ $cartItem['name']}}</p>
         <hr class="my-1">
         <div class="row">
-          <div class="col">Quantity:
-            <form action="/cart/update" method="post">
-              {{ csrf_field() }}
-
-            <input style="width:2rem;border:0;" type="number" name="quantity" value="{{ $cartItem['quantity'] }}" min="1">
-            <input type="hidden" name="id" value="{{ $cartItem['id'] }}">
-            <button type="submit" class="btn btn-info btn-sm pb-0"><i data-feather="refresh-cw"></i></button>
-            </form>
+          <div class="col">
+            <div class="form-inline">
+                Quantity: 
+                <form action="/cart/update" class="ml-2" method="post">
+                  {{ csrf_field() }}
+    
+                <input style="width:2rem;border:0;" type="number" name="quantity" value="{{ $cartItem['quantity'] }}" min="1">
+                <input type="hidden" name="id" value="{{ $cartItem['id'] }}">
+                <button type="submit" class="btn btn-info btn-sm pb-0"><i data-feather="refresh-cw"></i></button>
+                </form>
+            </div>
           </div>
           <div class="col">Price(no tax): {{ number_format($cartItem['price']) }} ￥</div>
           <div class="col text-right">Sub total: {{ number_format($cartItem['quantity']*$cartItem['price']) }} ￥</div>
@@ -39,7 +42,7 @@
     </div>
     
 
-    <div class="row pb-5">
+    <div class="row pb-5 text-right">
       <div class="col"></div>
       <div class="col"></div>
       <div class="col"></div>
@@ -73,7 +76,9 @@
         </form>
       </div>
       <div class="col">
-          <button type="button" class="btn btn-success btn-sm">Payment</button>
+          <a href="/cart/confirm">
+            <button type="button" class="btn btn-success btn-sm">Payment</button>
+          </a>
       </div>
     </div>
   @else

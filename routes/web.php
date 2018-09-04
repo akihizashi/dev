@@ -80,3 +80,7 @@ Route::post('/cart/remove', 'CartController@remove');
 Route::post('/cart/update', 'CartController@update');
 
 Route::post('/cart/clear', 'CartController@clear');
+
+Route::get('/cart/confirm', 'CartController@confirm');
+
+Route::post('/cart/pay', 'CartController@store');

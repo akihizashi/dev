@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Shop;
-use App\Cart;
+use Illuminate\Support\Facades\Auth;
+use App\Transaction;
 
 class CartController extends Controller
 {
@@ -84,6 +84,34 @@ class CartController extends Controller
       $request->session()->flush();
 
       return redirect('/cart')->with('status', 'Cart cleared');
+    }
+
+    public function confirm()
+    {
+      $cartItems = session('cart');
+      if ($cartItems !== null) {
+        $total = 0;
+        foreach ($cartItems as $cartItem) {
+          $subTotal = $cartItem['quantity']*$cartItem['price'];
+          $total += $subTotal;
+        }
+      }
+      return view('/cart.confirm', compact('cartItems', 'total'));
+    }
+
+    public function store(Request $request)
+    {
+      if (Auth::check()) {
+      Transaction::create([
+        'user_id' => auth()->id(),
+        'amount'  => request('amount'),
+      ]);
+        $request->session()->flush();
+
+        return redirect('/cart')->with('status', 'Your order was done');
+      } else {
+        return redirect('/login')->with('status', 'You have to login to do next step');
+      }
     }
 
 }
