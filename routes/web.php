@@ -36,6 +36,10 @@ Route::get('/admin/shops/{product}/edit', 'ShopsController@edit');
 
 Route::post('/admin/shops/{product}', 'ShopsController@update');
 
+Route::get('/admin/transactions', 'TransactionsController@index');
+
+Route::get('/admin/transactions/{transaction}', 'TransactionsController@show');
+
 //Frontend routes
 Route::get('/login', 'SessionController@create');
 

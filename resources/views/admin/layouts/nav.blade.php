@@ -22,7 +22,7 @@
         </a>
       </li>
       <li class="nav-item mx-2 py-2">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/admin/transactions">
           <i class="mr-2" data-feather="shopping-bag"></i>Orders
         </a>
       </li>
