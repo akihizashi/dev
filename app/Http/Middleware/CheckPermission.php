@@ -17,7 +17,7 @@ class CheckPermission
     public function handle($request, Closure $next)
     {
       if ($request->user()->role !== 'admin') {
-        return redirect('tasks');
+        return redirect('shops');
       }
         return $next($request);
     }

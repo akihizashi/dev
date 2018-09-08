@@ -107,7 +107,6 @@ class CartController extends Controller
         $transaction = Transaction::create([
           'user_id' => auth()->id(),
           'amount'  => request('amount'),
-          'status'  => 0
         ]);
         $transaction_id = $transaction->id;
         foreach ($cartItems as $cartItem) {
